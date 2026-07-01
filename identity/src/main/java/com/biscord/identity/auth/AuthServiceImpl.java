@@ -3,6 +3,7 @@ package com.biscord.identity.auth;
 import com.biscord.identity.auth.dtos.AuthResponse;
 import com.biscord.identity.auth.dtos.LoginRequest;
 import com.biscord.identity.auth.dtos.RegisterRequest;
+import com.biscord.identity.exception.customExceptions.DuplicateResourceException;
 import com.biscord.identity.user.User;
 import com.biscord.identity.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +27,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponse register(RegisterRequest request) {
         if (userService.existsByEmail(request.email())) {
-            throw new RuntimeException("Email already registered");
+            throw new DuplicateResourceException("Email already registered");
         }
         if (userService.existsByUsername(request.username())) {
-            throw new RuntimeException("Username already exists");
+            throw new DuplicateResourceException("Username already exists");
         }
 
         User user = User.builder()

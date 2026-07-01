@@ -1,0 +1,7 @@
+package com.biscord.identity.exception.customExceptions;
+
+public class DuplicateResourceException extends RuntimeException{
+    public DuplicateResourceException(String message) {
+        super(message);
+    }
+}

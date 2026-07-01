@@ -1,5 +1,6 @@
 package com.biscord.identity.user;
 
+import com.biscord.identity.exception.customExceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -12,19 +13,19 @@ class UserServiceImpl implements UserService{
     @Override
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found" + username));
+                .orElseThrow(() -> new ResourceNotFoundException("Username not found" + username));
     }
 
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Email not found" + email));
+                .orElseThrow(() -> new ResourceNotFoundException("Email not found" + email));
     }
 
     @Override
     public String getUsernameByEmail(String email) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Email not found" + email));
+                .orElseThrow(() -> new ResourceNotFoundException("Email not found" + email));
         return user.getUsername();
     }
 
