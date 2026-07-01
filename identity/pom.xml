@@ -76,7 +76,14 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.12.6</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.biscord</groupId>
+			<artifactId>biscord-common</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

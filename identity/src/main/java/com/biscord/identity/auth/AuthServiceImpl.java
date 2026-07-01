@@ -1,9 +1,10 @@
 package com.biscord.identity.auth;
 
+import com.biscord.common.JwtUtil;
+import com.biscord.common.exception.customExceptions.DuplicateResourceException;
 import com.biscord.identity.auth.dtos.AuthResponse;
 import com.biscord.identity.auth.dtos.LoginRequest;
 import com.biscord.identity.auth.dtos.RegisterRequest;
-import com.biscord.identity.exception.customExceptions.DuplicateResourceException;
 import com.biscord.identity.user.User;
 import com.biscord.identity.user.UserService;
 import lombok.RequiredArgsConstructor;

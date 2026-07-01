@@ -1,5 +1,6 @@
 package com.biscord.identity.auth;
 
+import com.biscord.common.exception.customExceptions.ResourceNotFoundException;
 import com.biscord.identity.user.User;
 import com.biscord.identity.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +16,19 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user;
+        try {
+            User user;
 
-        if (username.contains("@")) {
-            user = userService.getUserByEmail(username);
-        }
-        else {
-            user = userService.getUserByUsername(username);
-        }
+            if (username.contains("@")) {
+                user = userService.getUserByEmail(username);
+            }
+            else {
+                user = userService.getUserByUsername(username);
+            }
 
-        return new CustomUserDetails(user);
+            return new CustomUserDetails(user);
+        } catch (ResourceNotFoundException ex) {
+            throw new ResourceNotFoundException(username.contains("@") ? "Invalid email or password" : "Invalid username or password");
+        }
     }
 }
